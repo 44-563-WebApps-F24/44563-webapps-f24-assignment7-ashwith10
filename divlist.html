@@ -125,6 +125,47 @@
                 document.getElementById('target').insertBefore(item2Clone, items[index1]);
             }
         }
+        document.querySelector('#swapButton').addEventListener('click', () => {
+    let items = document.querySelectorAll('.item');
+    let index1 = Math.floor(Math.random() * items.length);
+    let index2;
+    
+    do {
+        index2 = Math.floor(Math.random() * items.length);
+    } while (index1 === index2); // Ensure different elements are chosen
+
+    let item1 = items[index1];
+    let item2 = items[index2];
+
+    if (Math.abs(index1 - index2) === 1) {
+        item2.insertAdjacentElement(index1 < index2 ? 'afterend' : 'beforebegin', item1);
+    } else {
+        let tempNode = document.createElement('div');
+        item1.replaceWith(tempNode);
+        item2.replaceWith(item1);
+        tempNode.replaceWith(item2);
+    }
+});
+function swap() {
+			let divListItems = document.getElementsByClassName("divlist");
+			let length = divListItems.length;
+			if (length > 1) 
+            {
+				let index1 = Math.floor(Math.random() * length);
+				let index2 = Math.floor(Math.random() * length);
+				while (index1 === index2) {
+					index2 = Math.floor(Math.random() * length);
+				}
+				let item1 = divListItems[index1];
+				let item2 = divListItems[index2];
+				let parent = item1.parentNode;
+				let next1 = item1.nextSibling === item2 ? item1 : item1.nextSibling;
+				let next2 = item2.nextSibling === item1 ? item2 : item2.nextSibling;
+				parent.insertBefore(item2, next1);
+				parent.insertBefore(item1, next2);
+			}
+		}
+
     </script>
     <a href="precision.html" class="button">Precision</a>
     <a href="safari.html" class="button">Safari</a>
